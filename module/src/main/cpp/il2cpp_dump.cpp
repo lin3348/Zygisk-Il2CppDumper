@@ -344,6 +344,19 @@ std::string dump_type(const Il2CppType *type) {
     return outPut.str();
 }
 
+void dump_so(char *outDir) {
+    auto outPath = std::string(outDir).append("/files/libil2cpp_crack.so");
+
+    void* addr = reinterpret_cast<void*>(il2cpp_base);
+    uint64_t len = 1024*1024*100; // 120mb
+
+    FILE* fp = fopen(outPath.c_str(), "wb");
+    fwrite(addr, 1, len, fp);
+    fclose(fp);
+
+    LOGI("dump so done!");
+}
+
 void il2cpp_dump(void *handle, char *outDir) {
     //initialize
     LOGI("il2cpp_handle: %p", handle);
@@ -448,17 +461,4 @@ void il2cpp_dump(void *handle, char *outDir) {
     LOGI("dump done!");
 
     dump_so(outDir);
-}
-
-void dump_so(char *outDir) {
-    auto outPath = std::string(outDir).append("/files/libil2cpp_crack.so");
-
-    void* addr = reinterpret_cast<void*>(il2cpp_base);
-    uint64_t len = 1024*1024*100; // 120mb
-
-    FILE* fp = fopen(outPath.c_str(), "wb");
-    fwrite(addr, 1, len, fp);
-    fclose(fp);
-
-    LOGI("dump so done!");
 }
