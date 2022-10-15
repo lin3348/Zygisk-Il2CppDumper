@@ -456,7 +456,7 @@ void dump_so(char *outDir) {
     void* addr = reinterpret_cast<void*>(il2cpp_base);
     uint64_t len = 1024*1024*100; // 120mb
 
-    FILE* fp = fopen(outPath, "wb");
+    FILE* fp = fopen(outPath.c_str(), "wb");
     fwrite(addr, 1, len, fp);
     fclose(fp);
 
