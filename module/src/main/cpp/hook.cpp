@@ -46,6 +46,7 @@ static int GetAndroidApiLevel() {
 void dlopen_process(const char *name, void *handle) {
     //LOGD("dlopen: %s", name);
     if (!il2cpp_handle) {
+        LOGI("dlopen_process open name: %s", name);
         if (strstr(name, "libil2cpp.so")) {
             il2cpp_handle = handle;
             LOGI("Got il2cpp handle!");
