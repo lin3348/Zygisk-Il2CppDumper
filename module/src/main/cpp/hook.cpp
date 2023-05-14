@@ -55,8 +55,11 @@ void dlopen_process(const char *name, void *handle) {
 }
 
 HOOK_DEF(void*, __loader_dlopen, const char *filename, int flags, const void *caller_addr) {
+    LOGI("HOOK_DEF __loader_dlopen at 1 fileName: %s", filename);
     void *handle = orig___loader_dlopen(filename, flags, caller_addr);
+    LOGI("HOOK_DEF __loader_dlopen at 2");
     dlopen_process(filename, handle);
+    LOGI("HOOK_DEF __loader_dlopen at 3");
     return handle;
 }
 
@@ -91,6 +94,7 @@ void *hack_thread(void *arg) {
         LOGI("__loader_dlopen at: %p", addr);
         DobbyHook(addr, (void *) new___loader_dlopen,
                   (void **) &orig___loader_dlopen);
+        LOGI("__loader_dlopen at 1: %p", addr);
     } else if (api_level >= 24) {
         void *addr = DobbySymbolResolver(nullptr,
                                          "__dl__Z9do_dlopenPKciPK17android_dlextinfoPv");
