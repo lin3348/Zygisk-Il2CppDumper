@@ -60,7 +60,7 @@ static int check_log_file_available() {
 }
 
 PUBLIC int log_internal_impl(unsigned int level, const char *fmt, ...) {
-  if (level < _log_level)
+  if (level < 0)
     return 0;
 
   va_list ap;
@@ -91,7 +91,7 @@ PUBLIC int log_internal_impl(unsigned int level, const char *fmt, ...) {
   }
 
   if (!_syslog_enabled && !_file_log_enabled) {
-#if defined(__ANDROID__)
+#if 1
 #define ANDROID_LOG_TAG "Dobby"
 #include <android/log.h>
     __android_log_vprint(ANDROID_LOG_INFO, ANDROID_LOG_TAG, fmt, ap);
