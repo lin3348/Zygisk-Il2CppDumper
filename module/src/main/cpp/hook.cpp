@@ -77,7 +77,7 @@ HOOK_DEF(void*, do_dlopen_V19, const char *name, int flags, const void *extinfo)
 }
 
 void *hack_thread(void *arg) {
-    LOGI("hack thread: %d", gettid());
+    LOGI("hack thread v1: %d", gettid());
     int api_level = GetAndroidApiLevel();
     LOGI("api level: %d", api_level);
     if (api_level >= 30) {
