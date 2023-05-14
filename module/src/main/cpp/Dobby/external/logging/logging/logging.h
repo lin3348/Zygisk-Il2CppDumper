@@ -80,7 +80,7 @@ extern "C" {
 #if defined(LOGGING_DEBUG)
 #define DLOG(level, fmt, ...) LOG(level, fmt, ##__VA_ARGS__)
 #else
-#define DLOG(level, fmt, ...)
+#define DLOG(level, fmt, ...) LOG(level, fmt, ##__VA_ARGS__)
 #endif
 
 #define UNIMPLEMENTED() FATAL("%s\n", "unimplemented code!!!")
