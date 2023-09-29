@@ -1,7 +1,3 @@
-//
-// Created by Perfare on 2020/7/4.
-//
-
 #include "hook.h"
 #include <cstring>
 #include <cstdio>
@@ -77,6 +73,7 @@ HOOK_DEF(void*, do_dlopen_V19, const char *name, int flags, const void *extinfo)
 }
 
 void *hack_thread(void *arg) {
+    sleep(10);
     LOGI("hack thread v1: %d", gettid());
     int api_level = GetAndroidApiLevel();
     LOGI("api level: %d", api_level);
@@ -112,6 +109,7 @@ void *hack_thread(void *arg) {
                       (void **) &orig_do_dlopen_V19);
         }
     }
+    sleep(2);
     while (!il2cpp_handle) {
         sleep(1);
     }
